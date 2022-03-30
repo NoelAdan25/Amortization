@@ -54,6 +54,7 @@
     <Compile Include="AmForm.Designer.cs">
       <DependentUpon>AmForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Logic\AnalizerFile.cs" />
     <Compile Include="Logic\CException.cs" />
     <Compile Include="Logic\Credito.cs" />

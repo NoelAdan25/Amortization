@@ -11,7 +11,7 @@ namespace Amortizaciones.Logic
     class AnalizerFile:IAnalizerFile
     {
         private readonly String[] headers = new String[] { "minAmount", "rate", "maxAmount" };
-        private String pathFile;
+        private readonly String pathFile;
         public AnalizerFile(String pathFile)
         {
             this.pathFile = pathFile;
@@ -21,9 +21,10 @@ namespace Amortizaciones.Logic
             bool flag = false;
             try
             {
-                //DataTable data = new DataTable();
-                TextFieldParser parser = new TextFieldParser(this.pathFile);
-                parser.TextFieldType = FieldType.Delimited;
+                TextFieldParser parser = new TextFieldParser(this.pathFile)
+                {
+                    TextFieldType = FieldType.Delimited
+                };
                 parser.SetDelimiters(",");
                 String[] fields = parser.ReadFields();
                 flag = this.headers.SequenceEqual(fields);
@@ -36,8 +37,10 @@ namespace Amortizaciones.Logic
         }
         public void LoadData(out List<float[]> customRate)
         {
-            TextFieldParser parser = new TextFieldParser(this.pathFile);
-            parser.TextFieldType = FieldType.Delimited;
+            TextFieldParser parser = new TextFieldParser(this.pathFile)
+            {
+                TextFieldType = FieldType.Delimited
+            };
             parser.SetDelimiters(",");
             parser.ReadLine();
             List<float[]> varValues = new List<float[]>();

@@ -41,13 +41,12 @@ namespace Amortizaciones
             Messages message;
             try
             {
-                if (Convert.ToBoolean(period.Value) & Convert.ToBoolean(amount.Value))
+                if (Convert.ToBoolean(period.Value) && Convert.ToBoolean(amount.Value))
                 {
                     AnalizerFile analizer = new AnalizerFile(fileData.Text.Trim());
                     if (analizer.IsValid())
                     {
-                        List<float[]> data = new List<float[]>();
-                        analizer.LoadData(out data);
+                        analizer.LoadData(out List<float[]> data);
                         Credito credito = new Credito((int)period.Value, (float)amount.Value, data);
                         credito.CalculateAmount();
                         CreditoReport report = new CreditoReport(credito);

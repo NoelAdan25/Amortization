@@ -3,24 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization;
+using System.Collections;
 
 namespace Amortizaciones.Logic
 {
-    class CException: Exception
+    [Serializable]
+    public sealed class CException : Exception
     {
-        private String messageR;
-        private Exception innerExceptions;
         public CException() { }
-        public CException(String message):base(message)
+        public CException(String message) : base(message) { }
+        public CException(String message, Exception innerException):base(message, innerException) { }
+        private CException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+        public string GetMessage()
         {
-            this.MessageR = message;
+            return base.Message;
         }
-        public CException(String message, Exception innerException):base(message, innerException)
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            this.messageR = message;
-            this.InnerExceptions = innerException;
+            base.GetObjectData(info, context);
         }
-        public string MessageR { get => messageR; private set => messageR = value; }
-        public Exception InnerExceptions { get => innerExceptions; private set => innerExceptions = value; }
     }
 }
